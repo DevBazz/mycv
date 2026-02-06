@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { createUserDto } from './dtos/create-user-dto';
 import { UsersService } from './users.service';
+import { UpdateUserDto } from './dtos/update-user-dto';
 
 @Controller('auth')
 export class UsersController {
@@ -27,5 +28,10 @@ export class UsersController {
    @Delete('/:id')
    removeUser(@Param('id') id: string){
     return this.userService.remove(parseInt(id))
+   }
+
+   @Patch('/:id')
+   updateUser(@Param('id') id: string, @Body() body: UpdateUserDto){
+     return this.userService.update(parseInt(id), body)
    }
 }
