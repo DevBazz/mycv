@@ -1,14 +1,16 @@
 /* eslint-disable prettier/prettier */
+import { Exclude } from "class-transformer";
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
     
     @Column()
-    email: string;
+    email!: string;
 
     @Column()
-    password: string;
+    @Exclude()
+    password!: string;
 }
